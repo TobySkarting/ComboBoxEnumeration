@@ -17,17 +17,17 @@ System::Void MyForm::button1_Click(System::Object^  sender, System::EventArgs^  
 	textBox1->Text = gcnew String(lpComboBoxClassName);
 
 	listBox1->Items->Clear(); 
-	LPSTR lpStr = new CHAR[200];
+	LPSTR lpComboText = new CHAR[200];
 	HWND hComboBox = FindWindowEx(hGroupBox, NULL, lpComboBoxClassName, NULL);
 	while (hComboBox)
 	{
 		HWND hComboEdit = FindWindowEx(hComboBox, NULL, NULL, NULL);
 
-		GetWindowText(hComboEdit, lpStr, 200);
-		listBox1->Items->Add(gcnew String(lpStr) + " - " + reinterpret_cast<unsigned int>(hComboBox).ToString("X"));
+		GetWindowText(hComboEdit, lpComboText, 200);
+		listBox1->Items->Add(gcnew String(lpComboText) + " - " + reinterpret_cast<unsigned int>(hComboBox).ToString("X"));
 		
 		hComboBox = FindWindowEx(hGroupBox, hComboBox, lpComboBoxClassName, NULL);
 	}
-	delete[] lpStr;
-
+	delete[] lpComboText;
+	delete[] lpComboBoxClassName;
 }
